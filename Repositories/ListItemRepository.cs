@@ -36,7 +36,7 @@ namespace CatelogVS.Repositories
             items[index] = item;
         }
 
-        public void DeleteItem(Guid id)
+        public void DeleteItem(Guid id)//Delete
         {
             var index = items.FindIndex(DeleteItem => DeleteItem.Id == id);
             items.RemoveAt(index);
