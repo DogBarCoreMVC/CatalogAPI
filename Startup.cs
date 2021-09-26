@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CatelogVS.Repositories;
+using CatelogVS.Setting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,7 +31,13 @@ namespace CatelogVS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<InterfaceRepository,ListItemRepository>();//Register Data จาก 2 Class
+            services.AddSingleton<IMongoClient>(ServiceProvider =>
+            {
+                var setting = Configuration.GetSection(nameof(MongoDbSetting)).Get<MongoDbSetting>();
+                return new MongoClient(setting.connectionString);
+            });
+            
+            services.AddSingleton<InterfaceRepository,MongoDbItemsRepository>();//Register Data จาก 2 Class
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
