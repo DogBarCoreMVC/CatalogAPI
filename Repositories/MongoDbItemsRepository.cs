@@ -26,7 +26,8 @@ namespace CatelogVS.Repositories
 
         public void DeleteItem(Guid id)
         {
-            throw new NotImplementedException();
+            var filter = filterBuilder.Eq(deleItem => deleItem.Id, id);
+            itemCollection.DeleteOne(filter);//ลบรายการที่ตรงกับ Id = id
         }
 
         public Item GetItem(Guid id)
@@ -43,7 +44,9 @@ namespace CatelogVS.Repositories
 
         public void UpdateItem(Item item)
         {
-            throw new NotImplementedException();
+            var filter = filterBuilder.Eq(updateItem => updateItem.Id, item.Id);
+            itemCollection.ReplaceOne(filter,item);
+            //ทำการแทนที่ item ด้วย filter ที่เป็น DataBase MongoDB
         }
     }
 }
