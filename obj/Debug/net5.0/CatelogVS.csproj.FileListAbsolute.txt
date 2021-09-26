@@ -27,3 +27,15 @@ C:\Project\Github\New Api\CatelogVS\obj\Debug\net5.0\CatelogVS.dll
 C:\Project\Github\New Api\CatelogVS\obj\Debug\net5.0\ref\CatelogVS.dll
 C:\Project\Github\New Api\CatelogVS\obj\Debug\net5.0\CatelogVS.pdb
 C:\Project\Github\New Api\CatelogVS\obj\Debug\net5.0\CatelogVS.genruntimeconfig.cache
+C:\Project\Github\New Api\CatelogVS\bin\Debug\net5.0\DnsClient.dll
+C:\Project\Github\New Api\CatelogVS\bin\Debug\net5.0\MongoDB.Bson.dll
+C:\Project\Github\New Api\CatelogVS\bin\Debug\net5.0\MongoDB.Driver.dll
+C:\Project\Github\New Api\CatelogVS\bin\Debug\net5.0\MongoDB.Driver.Core.dll
+C:\Project\Github\New Api\CatelogVS\bin\Debug\net5.0\MongoDB.Libmongocrypt.dll
+C:\Project\Github\New Api\CatelogVS\bin\Debug\net5.0\SharpCompress.dll
+C:\Project\Github\New Api\CatelogVS\bin\Debug\net5.0\runtimes\win\native\libzstd.dll
+C:\Project\Github\New Api\CatelogVS\bin\Debug\net5.0\runtimes\win\native\snappy32.dll
+C:\Project\Github\New Api\CatelogVS\bin\Debug\net5.0\runtimes\win\native\snappy64.dll
+C:\Project\Github\New Api\CatelogVS\bin\Debug\net5.0\runtimes\linux\native\libmongocrypt.so
+C:\Project\Github\New Api\CatelogVS\bin\Debug\net5.0\runtimes\osx\native\libmongocrypt.dylib
+C:\Project\Github\New Api\CatelogVS\bin\Debug\net5.0\runtimes\win\native\mongocrypt.dll
