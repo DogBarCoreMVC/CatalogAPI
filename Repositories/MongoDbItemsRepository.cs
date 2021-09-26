@@ -1,3 +1,4 @@
+using System.Reflection.Emit;
 using System;
 using System.Collections.Generic;
 using CatelogVS.Entities;
@@ -11,6 +12,8 @@ namespace CatelogVS.Repositories
         private const string databaseName = "catalog"; //const = ค่าคงที่
         private const string CollectionsName = "items";
         private readonly IMongoCollection<Item> itemCollection;
+        private readonly FilterDefinitionBuilder<Item> filterBuilder = Builders<Item>.Filter;
+        //create value filter (ใช้ในการตรวจสอบรายการใน collention)
         public MongoDbItemsRepository(IMongoClient mongoClient)//Dependency Injection
         {
             IMongoDatabase database = mongoClient.GetDatabase(databaseName);//ทำการอ้างอิงไปยัง Database
@@ -28,7 +31,9 @@ namespace CatelogVS.Repositories
 
         public Item GetItem(Guid id)
         {
-            throw new NotImplementedException();
+            var filter = filterBuilder.Eq(item => item.Id, id);
+            return itemCollection.Find(filter).SingleOrDefault();
+            //SingleOrDefault ให้แสดงเฉพาะไอที่ตรงกับ Id = id ค่าที่ผ่านเข้าไปที่ parameter ...จะไม่แสดงรายการทั้งหมดออกมา
         }
 
         public IEnumerable<Item> GetItems()
