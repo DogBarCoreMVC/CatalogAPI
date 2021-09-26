@@ -1,14 +1,23 @@
 using System;
 using System.Collections.Generic;
 using CatelogVS.Entities;
+using MongoDB.Driver;
 
 namespace CatelogVS.Repositories
 {
     public class MongoDbItemsRepository : InterfaceRepository
     {
+        private const string databaseName = "catalog"; //const = ค่าคงที่
+        private const string CollectionsName = "items";
+        private readonly IMongoCollection<Item> itemCollection;
+        public MongoDbItemsRepository(IMongoClient mongoClient)//Dependency Injection
+        {
+            IMongoDatabase database = mongoClient.GetDatabase(databaseName);//ทำการอ้างอิงไปยัง Database
+            itemCollection = database.GetCollection<Item>(CollectionsName);//ทำการอ้างอิง collections
+        }
         public void CreateItem(Item item)
         {
-            throw new NotImplementedException();
+            itemCollection.InsertOne(item);
         }
 
         public void DeleteItem(Guid id)
