@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CatelogVS.Entities;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace CatelogVS.Repositories
@@ -31,8 +32,8 @@ namespace CatelogVS.Repositories
         }
 
         public IEnumerable<Item> GetItems()
-        {
-            throw new NotImplementedException();
+        {//แสดงรายการทั้งหมดที่มี
+            return itemCollection.Find(new BsonDocument()).ToList();
         }
 
         public void UpdateItem(Item item)
