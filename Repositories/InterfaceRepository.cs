@@ -6,10 +6,10 @@ namespace CatelogVS.Repositories
 {
    public interface InterfaceRepository//Create interface Method
     {
-        IEnumerable<Item> GetItems();
+        IEnumerable<Item> GetItemsAsync();
         Item GetItemAsync(Guid id);
-        void CreateItem(Item item);
-        void UpdateItem(Item item);
-        void DeleteItem(Guid id);
+        void CreateItemAsync(Item item);
+        void UpdateItemAsync(Item item);
+        void DeleteItemAsync(Guid id);
     }
 }

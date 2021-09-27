@@ -19,12 +19,12 @@ namespace CatelogVS.Repositories
             IMongoDatabase database = mongoClient.GetDatabase(databaseName);//ทำการอ้างอิงไปยัง Database
             itemCollection = database.GetCollection<Item>(CollectionsName);//ทำการอ้างอิง collections
         }
-        public void CreateItem(Item item)
+        public void CreateItemAsync(Item item)
         {
             itemCollection.InsertOne(item);
         }
 
-        public void DeleteItem(Guid id)
+        public void DeleteItemAsync(Guid id)
         {
             var filter = filterBuilder.Eq(deleItem => deleItem.Id, id);
             itemCollection.DeleteOne(filter);//ลบรายการที่ตรงกับ Id = id
@@ -37,12 +37,12 @@ namespace CatelogVS.Repositories
             //SingleOrDefault ให้แสดงเฉพาะไอที่ตรงกับ Id = id ค่าที่ผ่านเข้าไปที่ parameter ...จะไม่แสดงรายการทั้งหมดออกมา
         }
 
-        public IEnumerable<Item> GetItems()
+        public IEnumerable<Item> GetItemsAsync()
         {//แสดงรายการทั้งหมดที่มี
             return itemCollection.Find(new BsonDocument()).ToList();
         }
 
-        public void UpdateItem(Item item)
+        public void UpdateItemAsync(Item item)
         {
             var filter = filterBuilder.Eq(updateItem => updateItem.Id, item.Id);
             itemCollection.ReplaceOne(filter,item);

@@ -23,7 +23,7 @@ namespace CatelogVS.Controllers
         
         public IEnumerable<ItemDto> GetItems()
         {//IEnumerable ใช้เพื่อแสดงข้อมูลที่มากๆ ใน list หรือ DataBase
-            var Items = repository.GetItems().Select(item => item.AsDto());
+            var Items = repository.GetItemsAsync().Select(item => item.AsDto());
 
             return Items;
         }
@@ -54,7 +54,7 @@ namespace CatelogVS.Controllers
                 CrateDate = DateTimeOffset.UtcNow//service set
             };
 
-            repository.CreateItem(item);
+            repository.CreateItemAsync(item);
 
             return CreatedAtAction(nameof(GetItem), new {id = item.Id}, item.AsDto());
         }
@@ -77,7 +77,7 @@ namespace CatelogVS.Controllers
                 Price = itemDto.Price
             };
 
-            repository.UpdateItem(Update);
+            repository.UpdateItemAsync(Update);
 
             return NoContent();
         }
@@ -93,7 +93,7 @@ namespace CatelogVS.Controllers
                 return NotFound();
             }
 
-            repository.DeleteItem(id);
+            repository.DeleteItemAsync(id);
             
             return NoContent();
         }
