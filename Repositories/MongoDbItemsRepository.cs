@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using CatelogVS.Entities;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Threading.Tasks;
 
 namespace CatelogVS.Repositories
 {
@@ -19,33 +20,33 @@ namespace CatelogVS.Repositories
             IMongoDatabase database = mongoClient.GetDatabase(databaseName);//ทำการอ้างอิงไปยัง Database
             itemCollection = database.GetCollection<Item>(CollectionsName);//ทำการอ้างอิง collections
         }
-        public void CreateItemAsync(Item item)
+        public async Task CreateItemAsync(Item item)
         {
-            itemCollection.InsertOne(item);
+            await itemCollection.InsertOneAsync(item);
         }
 
-        public void DeleteItemAsync(Guid id)
+        public async Task DeleteItemAsync(Guid id)
         {
             var filter = filterBuilder.Eq(deleItem => deleItem.Id, id);
-            itemCollection.DeleteOne(filter);//ลบรายการที่ตรงกับ Id = id
+            await itemCollection.DeleteOneAsync(filter);//ลบรายการที่ตรงกับ Id = id
         }
 
-        public Item GetItemAsync(Guid id)
+        public async Task<Item> GetItemAsync(Guid id)
         {
             var filter = filterBuilder.Eq(item => item.Id, id);
-            return itemCollection.Find(filter).SingleOrDefault();
+            return await itemCollection.Find(filter).SingleOrDefaultAsync();
             //SingleOrDefault ให้แสดงเฉพาะไอที่ตรงกับ Id = id ค่าที่ผ่านเข้าไปที่ parameter ...จะไม่แสดงรายการทั้งหมดออกมา
         }
 
-        public IEnumerable<Item> GetItemsAsync()
+        public async Task<IEnumerable<Item>> GetItemsAsync()
         {//แสดงรายการทั้งหมดที่มี
-            return itemCollection.Find(new BsonDocument()).ToList();
+            return await itemCollection.Find(new BsonDocument()).ToListAsync();
         }
 
-        public void UpdateItemAsync(Item item)
+        public async Task UpdateItemAsync(Item item)
         {
             var filter = filterBuilder.Eq(updateItem => updateItem.Id, item.Id);
-            itemCollection.ReplaceOne(filter,item);
+            await itemCollection.ReplaceOneAsync(filter,item);
             //ทำการแทนที่ item ด้วย filter ที่เป็น DataBase MongoDB
         }
     }
