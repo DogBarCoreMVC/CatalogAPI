@@ -41,7 +41,12 @@ namespace CatelogVS
             });
             
             services.AddSingleton<InterfaceRepository,MongoDbItemsRepository>();//Register Data จาก 2 Class
-            services.AddControllers();
+            services.AddControllers(options => 
+            {
+                options.SuppressAsyncSuffixInActionNames = false;
+                //เมื่อเราได้เปลี่ยนมาใช้ method async ทุกครั้งเวลา กด run dotnet จะลบ async ที่ต่อท้ายชื่อ method ออก และจะทำให้ไม่สารารถรับหรือส่งข้อมูลได้ คือจะไม่มีเส้นทาง
+                //การที่เราประกาศแบบนี้ SuppressAsyncSuffixInActionNames = false จะทำให้ dotnet ไม่สามารถ ลบ async ที่ต่อท้ายชื่อ method ออกได้ และเราจะรับส่งข้อมูลได้ได้ปกติ คือมีเส้นทาง
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CatelogVS", Version = "v1" });
