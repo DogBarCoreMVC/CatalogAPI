@@ -30,7 +30,7 @@ namespace CatelogVS.Repositories
             itemCollection.DeleteOne(filter);//ลบรายการที่ตรงกับ Id = id
         }
 
-        public Item GetItem(Guid id)
+        public Item GetItemAsync(Guid id)
         {
             var filter = filterBuilder.Eq(item => item.Id, id);
             return itemCollection.Find(filter).SingleOrDefault();

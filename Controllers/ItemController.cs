@@ -32,7 +32,7 @@ namespace CatelogVS.Controllers
         [HttpGet("{id}")]//Method HttpGet(id) จะตอบกลับไปจากการเรียกใช้งานของผู้ใช้ โดยให้ผู้ใช้ใส่ค่า id ที่ต้องการค้นหา โดยจะแสดงข้อมูลใน Method GetItem(Guid id)
         public ActionResult<ItemDto> GetItem(Guid id)//รับข้อมูลจากผู้ใช้คือ id //ActionResult จะสามารถส่งค่าได้มากกว่า 1 ประเภท
         {
-            var item = repository.GetItem(id);
+            var item = repository.GetItemAsync(id);
             if(item is null)//null ค่าว่าง
             {
                 return NotFound();//Return Status 404
@@ -64,7 +64,7 @@ namespace CatelogVS.Controllers
         [HttpPut("{id}")]
         public ActionResult UpdateItem(Guid id, UpdateItemDto itemDto)
         {
-            var DataItem = repository.GetItem(id);
+            var DataItem = repository.GetItemAsync(id);
 
             if (DataItem is null)
             {
@@ -86,7 +86,7 @@ namespace CatelogVS.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteItem(Guid id)
         {
-            var DelItem = repository.GetItem(id);
+            var DelItem = repository.GetItemAsync(id);
 
             if (DelItem is null)
             {

@@ -19,7 +19,7 @@ namespace CatelogVS.Repositories
         {//IEnumerable ใช้เพื่อแสดงข้อมูลที่มากๆ ใน list หรือ DataBase 
             return items;
         }
-        public Item GetItem(Guid id)
+        public Item GetItemAsync(Guid id)
         {
             return items.Where(item => item.Id == id).SingleOrDefault();
             //SingleOrDefault แสดงผลออกมาเฉพราะค่าที่ตรงกับ id เท่านั้น
